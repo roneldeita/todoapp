@@ -1,7 +1,8 @@
 import React from 'react'
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
-import {Form,Col, Row, notification, Card, Button} from 'antd'
+import {Form, Col, Row, notification, Card, Button} from 'antd'
+import { Map } from 'immutable'
 
 const openNotification = (type, title, message) => {
   notification[type]({
@@ -20,7 +21,12 @@ class Todo extends React.PureComponent{
         {title:'Walk the dog', edit: false, checked:false, completed: false},
         {title:'Bath the dog', edit: false, checked:false, completed: false},
         {title:'Play with the dog', edit: false, checked:false, completed: false}
-      ]
+      ],
+      test:{
+        name:'asdkjsn',
+        age:86,
+        address:'asdjoanlsdhaosudh.asd ajsd asdashdh  aousd asdh .ah'
+      }
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
@@ -110,6 +116,9 @@ class Todo extends React.PureComponent{
     event.preventDefault()
   }
   render(){
+    const Immut = Map(this.state.test)
+    Immut.set('name', 'Joy Tica-a')
+    console.log(Immut)
     return(
       <Row type="flex" justify="center" style={{marginTop:'80px'}}>
         <Col span={8}>
