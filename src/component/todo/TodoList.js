@@ -16,14 +16,14 @@ export default ({todos, remove, mutipleRemove, complete, edit, change, blur, che
             <Input
               defaultValue={item.title}
               test={item}
-              onChange={todo => change(todo, item)}
-              onBlur={() => blur(item)}
-              onKeyPress={event=> event.key === 'Enter' && blur(item)}
+              onChange={todo => change(todo, index)}
+              onBlur={() => blur(index)}
+              onKeyPress={event=> event.key === 'Enter' && blur(index)}
               style={{maxWidth:'250px', marginLeft:5}}/> :
             <span
               style={{textDecoration: item.completed && 'line-through'}}
-              onDoubleClick={() => edit(item)}>
-              <Checkbox checked={item.checked} onChange={() => check(item)}/>
+              onDoubleClick={() => edit(index)}>
+              <Checkbox checked={item.checked} onChange={() => check(index)}/>
               <span style={{marginLeft:10}}>{item.title}</span>
             </span>}
           <Button

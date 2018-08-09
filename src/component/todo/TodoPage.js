@@ -2,7 +2,7 @@ import React from 'react'
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
 import {Form, Col, Row, notification, Card, Button} from 'antd'
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 
 const openNotification = (type, title, message) => {
   notification[type]({
@@ -37,41 +37,59 @@ class Todo extends React.PureComponent{
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
   }
-  handleCheck(selectedTodo){
-    const todos = this.state.todos.map(todo => {
-      if(todo === selectedTodo){
-        todo.checked=!todo.checked
-      }
-      return todo
-    })
+  handleCheck(index){
+    const GetTodos = List(this.state.todos)
+    const SelectTodo = Map(GetTodos.get(index))
+    const UpdateTodo = SelectTodo.set('checked', !SelectTodo.get('checked')).toObject()
+    const todos = GetTodos.set(index, UpdateTodo)
     this.setState({todos})
+    // const todos = this.state.todos.map(todo => {
+    //   if(todo === selectedTodo){
+    //     todo.checked=!todo.checked
+    //   }
+    //   return todo
+    // })
+    // this.setState({todos})
   }
-  handleBlur(selectedTodo){
-    const todos = this.state.todos.map(todo => {
-      if(todo === selectedTodo){
-        todo.edit=false
-      }
-      return todo
-    })
+  handleBlur(index){
+    const GetTodos = List(this.state.todos)
+    const SelectThenUpdateTodo = Map(GetTodos.get(index)).set('edit', false).toObject()
+    const todos = GetTodos.set(index, SelectThenUpdateTodo)
     this.setState({todos})
+    // const todos = this.state.todos.map(todo => {
+    //   if(todo === selectedTodo){
+    //     todo.edit=false
+    //   }
+    //   return todo
+    // })
+    // this.setState({todos})
   }
-  handleChange(event, selectedTodo){
-    const todos = this.state.todos.map(todo => {
-      if(todo === selectedTodo){
-        todo.title=event.target.value
-      }
-      return todo
-    })
+  handleChange(event, index){
+    const GetTodos = List(this.state.todos)
+    const SelectThenUpdateTodo = Map(GetTodos.get(index)).set('title', event.target.value).toObject()
+    const todos = GetTodos.set(index, SelectThenUpdateTodo)
     this.setState({todos})
+    // const todos = this.state.todos.map(todo => {
+    //   if(todo === selectedTodo){
+    //     todo.title=event.target.value
+    //   }
+    //   return todo
+    // })
+    // this.setState({todos})
   }
-  handleEdit(selectedTodo){
-    const todos = this.state.todos.map(todo => {
-      if(todo === selectedTodo){
-        todo.edit=true
-      }
-      return todo
-    })
+  handleEdit(index){
+    const GetTodos = List(this.state.todos)
+    const SelectThenUpdateTodo = Map(GetTodos.get(index)).set('edit', true).toObject()
+    const todos = GetTodos.set(index, SelectThenUpdateTodo)
     this.setState({todos})
+
+    // const todos = this.state.todos.map(todo => {
+    //   if(todo === selectedTodo){
+    //     todo.edit=true
+    //   }
+    //   return todo
+    // })
+    // this.setState({todos})
   }
   handleComplete(){
     const todos = this.state.todos.map(todo => {
@@ -116,9 +134,6 @@ class Todo extends React.PureComponent{
     event.preventDefault()
   }
   render(){
-    const Immut = Map(this.state.test)
-    Immut.set('name', 'Joy Tica-a')
-    console.log(Immut)
     return(
       <Row type="flex" justify="center" style={{marginTop:'80px'}}>
         <Col span={8}>

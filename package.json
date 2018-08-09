@@ -1,6 +1,6 @@
 {
   "name": "todo-app",
-  "homepage" : "https://roneldeita.github.io/todoapp",
+  "homepage": "https://roneldeita.github.io/todoapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,8 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   }
 }
